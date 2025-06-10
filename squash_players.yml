@@ -1,0 +1,67 @@
+column_names:
+  - Rank
+  - PSA_ID
+  - First_Name
+  - Last_Name
+  - Country
+  - Year_of_Birth
+  - Address
+  - Zip_Code
+all_columns_required: True
+no_extra_columns_allowed: True
+columns:
+  Rank:
+    value_type: integer
+    range:
+      - gt: 0 #lt | gt | lte | gte
+  PSA_ID:
+    value_type: string
+    unique: True
+    prefix: 'PSA'
+    not_match: 'PSA0000'
+  First_Name:
+    value_type: string
+  Last_Name:
+    value_type: string
+  Country:
+    value_type: string
+    is_in:
+      - 'EGY'
+      - 'PER'
+      - 'NZL'
+      - 'IND'
+      - 'MAS'
+      - 'WAL'
+      - 'ENG'
+      - 'FRA'
+      - 'SUI'
+  Year_of_Birth:
+    value_type: date-time
+    format: 'YYYY'
+  Address:
+    value_type: string
+  Zip_Code:
+    null: False
+conditional_rules:
+  Country_Zip1:
+    if:
+      column: Country
+      valuerule:
+        is_in:
+          - 'WAL'
+          - 'ENG'
+    then:
+      column: Zip_Code
+      valuerule:
+        value_type: string
+  Country_Zip2:
+    if:
+      column: Country
+      valuerule:
+        not_in:
+          - 'WAL'
+          - 'ENG'
+    then:
+      column: Zip_Code
+      valuerule:
+        value_type: integer

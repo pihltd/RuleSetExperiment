@@ -1,0 +1,64 @@
+column_names:
+  - Rank
+  - PSA_ID
+  - First_Name
+  - Last_Name
+  - Country
+  - Year_of_Birth
+  - Address
+  - Zip_Code
+all_columns_required: True #Default False
+no_extra_columns_allowed: True #Default False
+check_column_order: False #Default False
+columns:
+  Rank:
+    value_type: integer
+    required: True #Overriden by "all columns required"?
+    unique: True # Default False
+    null: True #Default true 
+    pattern: /^A # Regex goes here
+    is_in:
+      - list
+      - of
+      - values
+    not_in:
+      - list
+      - of
+      - values 
+    match: string or integer
+    not_match: string or integer
+    range:
+      - gt: 0 #lt | gt | lte | gte
+    exact_length: 5 
+    min_length: 0
+    max_length: 8
+    prefix:  "ABC"
+    suffix: ".csv"
+    includes: "urgent"
+    not_include: "spam"
+    significant_digits: 3
+    decimal_places: 2
+  PSA_ID:
+    value_type: string
+  First_Name:
+    value_type: string
+  Last_Name:
+    value_type: string
+  Country:
+    value_type: string
+  Year_of_Birth:
+    value_type: date-time
+  Address:
+    value_type: string
+  Zip_Code:
+    null: False  #Default True
+conditional_rules:
+  Country_Zip1:
+    if:
+      column: country
+      valuerule: 
+        match: 'USA'
+    then:
+      column: Zip_Code
+      valuerule:
+        pattern: /^A
