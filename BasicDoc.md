@@ -1,25 +1,29 @@
 # Set Value Rules
-Settings that pply before column-level vaidation.  Not sure this applies if we're using just conditionals
+## NOT NEEDED FOR CRDC
+
+Settings that pply before property-level vaidation.  Not sure this applies if we're using just conditionals
 ## allowed_null_values
 ## thouseands_separator
 ## set_precision
 
-# Column Rules
-Same as above, the MDF really defines the column rules
-## column_names
-List of columns that the table must contain.  This is required
-## all_columns_required
+# property Rules
+## NOT NEEDED FOR CRDC
+
+Same as above, the MDF really defines the property rules
+## property_names
+List of propertys that the table must contain.  This is required
+## all_propertys_required
 Boolean (True/False).  Default False
-## no_extra_columns_allowed
+## no_extra_propertys_allowed
 Boolean.  Default False
-## check_column_order
+## check_property_order
 Boolean.  Default False
 
 # Value Rules
-The various value rules would be used but only in the context of conditional_rules
+For CRDC, the various value rules would be used but only in the context of conditional_rules
 Block Syntax
-columns:
-  <ColumnName>:
+properties:
+  <propertyName>:
     <ValueRule1>
     <ValueRule2>
 
@@ -91,10 +95,10 @@ List of lt | gt | lte | gte followed by integer
 conditional_rules:
   <RuleName1>:
     if:
-      column: <ColumnA>
+      property: <PropertyName>
       valuerule: <ValueRuleA>
     then:
-      column: <ColumnB>
+      property: <PropertyName>
       valuerule: <ValueRuleB>
 
 
@@ -102,36 +106,43 @@ conditional_rules:
 conditional_rules:
   Country_Subdivision1:
     if:
-      column: Country
+      property: Country
       valuerule:
         is: 'US'
     then:
-      column: Province/State
+      property: Province/State
       valuerule:
         is_in:
           - property: "US_State"
 Country_Subdivision2:
     if:
-      column: Country
+      property: Country
       valuerule:
         is: 'Canada'
     then:
-      column: Province/State
+      property: Province/State
       valuerule:
         is_in:
           - property: "Canada_Province"
 
 
-Example of requiring multiple columns
+Example of requiring multiple propertys
 
 diagnosis_req1:
   if:
-    column: primary_diagnosis
+    property: primary_diagnosis
     valuerule:
       is: 'Breast, NOS'
   then:
-    columns:
-      column: sex
+    propertys:
+      property: sex
         is: 'female'
-      column: age
+      property: age
         required: True
+
+# Evaluation rules
+- Data Load validations happen first
+- Lists in rule files have priority over other lists
+- Lists in MDF enum have priority over CDE PVs
+- Rules in a RuleSet file take precendence over Data Loader
+-- An error found by data loader can be reversed by a RuleSet rule
