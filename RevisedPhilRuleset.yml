@@ -1,0 +1,15 @@
+conditional_rules:
+  participant:  #This would be the node name
+    - if:
+      participant_case_indicator:
+        is: 'No'
+      then:
+        diagnosis: #This is also a node
+          - cancer_diagnosis_primary_site:
+            is: 'Not Applicable'
+          - cancer_diagnosis_disease_morphology:
+            is: 'Not Applicable'
+          - age_at_first_cancer_diagnosis:
+            null: True #This might be better if the property is of type Int because 'Not Applicable' is a string
+          - age_at_first_cancer_diagnosis:
+            is: 048737684723668459  #Integer code for the 'Not Applicable' value in the CDE

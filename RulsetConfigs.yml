@@ -1,0 +1,3 @@
+loadsheets:
+  - node:filepath
+rulefile: path_to_rulefile
