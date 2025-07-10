@@ -1,3 +1,15 @@
 loadsheets:
-  - node:filepath
-rulefile: path_to_rulefile
+  #- node:filepath
+  - diagnosis: 'C:\Users\pihltd\Documents\datadir\PDXNet_diagnosis.tsv'
+  - file: 'C:\Users\pihltd\Documents\datadir\PDXNet_file.tsv'
+  - genomic_info: 'C:\Users\pihltd\Documents\datadir\PDXNet_genomic_info.tsv'
+  - image: 'C:\Users\pihltd\Documents\datadir\PDXNet_image.tsv'
+  - participant: 'C:\Users\pihltd\Documents\datadir\PDXNet_participant.tsv'
+  - program: 'C:\Users\pihltd\Documents\datadir\PDXNet_program.tsv'
+  - sample: 'C:\Users\pihltd\Documents\datadir\PDXNet_sample.tsv'
+  - study: 'C:\Users\pihltd\Documents\datadir\PDXNet_study.tsv'
+rulefile: 'C:\Users\pihltd\Documents\datadir\TestRuleFile.yml'
+errorfile: 'C:\Users\pihltd\Documents\datadir\RuleFileErrors.csv'
+mdffiles:
+  - 'https://raw.githubusercontent.com/CBIIT/cds-model/refs/heads/main/model-desc/cds-model.yml'
+  - 'https://raw.githubusercontent.com/CBIIT/cds-model/refs/heads/main/model-desc/cds-model-props.yml'
