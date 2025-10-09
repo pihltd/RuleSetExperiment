@@ -1,0 +1,48 @@
+conditional_rules:
+# Rule structure is 
+#Nodename:
+#    - property_name:
+#      is:  Condition can be a value/data type/None/not None
+#      then:
+#        target_node_name:
+#          - property_name:
+#            is: value/data type
+#            isReq: Boolean (changes model required/not required, but not PVs if present)
+#          - property_name2:
+#            is: value/datatype
+#            isReq: Boolean
+#        target_node_name2:
+#          - property_name3:
+#            is: value/datatype
+#            isReq: Boolean
+  diagnosis:
+    - primary_diagnosis:
+        is:  NotNone
+        then:
+          diagnosis:
+            - tumor_grade:
+                isReq: True
+            - diagnosis_id:
+                isReq: True
+  program:
+    - program_short_name:
+        is: HTAN
+        then:
+          sample:
+            - sample_id:
+                is: None
+  sample:
+    - sample_type_category:
+        is: NotNone
+        then:
+          sample:
+            - sample_type_category:
+                enum: ['DNA', 'RNA']
+          genomic_info:
+            - reference_genome_assembly:
+                is: GRCh38
+            - library_selection:
+                enum: ['Restriction Digest', 'RACE']
+            
+        
+

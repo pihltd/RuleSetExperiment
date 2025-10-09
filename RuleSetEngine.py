@@ -208,5 +208,6 @@ if __name__ == "__main__":
     # Length  exact/min/max
     # String prefix/suffix/includes/no includes
     # Pattern/regex
+    # Required True/False
     
     
