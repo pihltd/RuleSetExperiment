@@ -1,28 +1,26 @@
 conditional_rules:
 # Rule structure is 
-#Nodename:
-#    - property_name:
-#      is:  Condition can be a value/data type/None/not None
-#      then:
-#        target_node_name:
-#          - property_name:
-#            is: value/data type
-#            isReq: Boolean (changes model required/not required, but not PVs if present)
-#          - property_name2:
-#            is: value/datatype
-#            isReq: Boolean
-#        target_node_name2:
-#          - property_name3:
-#            is: value/datatype
-#            isReq: Boolean
+#NodeName:
+#  - property_name:
+#    is: None/NotNone/Match
+#    then:
+#      target_node_name:
+#        - target_property_name:
+#            scope: global/each
+#            is: (or isReq)
+#  - property_name2:
+#NodeName2:
+
   diagnosis:
     - primary_diagnosis:
         is:  NotNone
         then:
           diagnosis:
             - tumor_grade:
+                scope: each
                 isReq: True
             - diagnosis_id:
+                scope: each
                 isReq: True
   program:
     - program_short_name:
@@ -30,6 +28,7 @@ conditional_rules:
         then:
           sample:
             - sample_id:
+                scope: global
                 is: None
   sample:
     - sample_type_category:
@@ -37,12 +36,19 @@ conditional_rules:
         then:
           sample:
             - sample_type_category:
-                enum: ['DNA', 'RNA']
+                enum:
+                  - 'DNA'
+                  - 'RNA'
+                scope: each
           genomic_info:
             - reference_genome_assembly:
                 is: GRCh38
+                scope: each
             - library_selection:
-                enum: ['Restriction Digest', 'RACE']
+                enum:
+                  - 'Restriction Digest'
+                  - 'RACE'
+                scope: each
             
         
 
