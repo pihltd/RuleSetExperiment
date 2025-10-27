@@ -169,6 +169,8 @@ def doRowSearch(target_node, target_test, test_value, test_property, starting_pr
 
 
 
+
+
 def main(args):
     # Parse the configs
     if args.verbose >= 1:
@@ -176,6 +178,9 @@ def main(args):
     configs = crdclib.readYAML(args.configfile)
     if args.verbose >= 2:
         print(f"Starting Configs:\n{configs}")
+
+    # Make an MDF version of the model
+    mdf = bento_mdf.MDF(*configs['mdffiles'])
 
     # Read the rule set
     if args.verbose >= 1:

@@ -1,0 +1,24 @@
+$schema: http://json-schema.org/draft-06/schema#
+$id: https://github.com/pihltd/RuleSetExperiment/ruleset_schema.yml#
+title: "RuleSet"
+description: "An if/then rule set for CRDC"
+
+type: object
+properties:
+  conditional_rules:
+    dimensions:
+      type: object
+      nodeNames:
+        $ref: "#/defs/snake_case_id"  
+        is: 
+          type: string
+        then:
+          nodeNames:
+            propertyNames:
+              scope:
+                type: string
+              isReq:
+                type: boolean
+              enum:
+                type: array
+    required: ['is', 'then']

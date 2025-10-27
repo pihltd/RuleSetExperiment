@@ -1,0 +1,81 @@
+{
+    "conditional_rules": {
+        "diagnosis": [
+            {
+                "primary_diagnosis": {
+                    "is": "NotNone",
+                    "then": {
+                        "diagnosis": [
+                            {
+                                "tumor_grade": {
+                                    "scope": "each",
+                                    "isReq": true
+                                }
+                            },
+                            {
+                                "diagnosis_id": {
+                                    "scope": "each",
+                                    "isReq": true
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+        "program": [
+            {
+                "program_short_name": {
+                    "is": "HTAN",
+                    "then": {
+                        "sample": [
+                            {
+                                "sample_id": {
+                                    "scope": "global",
+                                    "is": "None"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+        "sample": [
+            {
+                "sample_type_category": {
+                    "is": "NotNone",
+                    "then": {
+                        "sample": [
+                            {
+                                "sample_type_category": {
+                                    "enum": [
+                                        "DNA",
+                                        "RNA"
+                                    ],
+                                    "scope": "each"
+                                }
+                            }
+                        ],
+                        "genomic_info": [
+                            {
+                                "reference_genome_assembly": {
+                                    "is": "GRCh38",
+                                    "scope": "each"
+                                }
+                            },
+                            {
+                                "library_selection": {
+                                    "enum": [
+                                        "Restriction Digest",
+                                        "RACE"
+                                    ],
+                                    "scope": "each"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
